@@ -17,17 +17,11 @@ public:
         // int i = 0;
         int cnt = 0;
         
-        for(int i = 0 ; i < boxTypes.size(); i++){
-            int temp = boxTypes[i][0];
-            if(cnt == truckSize) break;
-            
-            while(temp){
-                if(cnt == truckSize) return ans;
-                ans += boxTypes[i][1];
-                cnt ++;
-                temp--;
-            }
-            
+        for(auto box : boxTypes){
+            int x = min(box[0], truckSize);
+            ans += (x * box[1]);
+            truckSize -= x;
+            if(!truckSize) break;
         }
         
         return ans;
