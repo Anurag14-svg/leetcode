@@ -1,6 +1,7 @@
 class Solution {
 public:
     
+// Memoization
 //     int ans(int n , vector<int>& nums, vector<int>& dp){
 //         if( n == 0) return nums[0];
         
@@ -22,6 +23,7 @@ public:
 //     }
     
     int rob(vector<int>& nums) {
+// Tabulation
 //         int n = nums.size();
 //         vector<int> dp(n , -1);
 //         dp[0] = nums[0];
@@ -38,13 +40,15 @@ public:
         
 //         return dp[n - 1];
         
+// Space optimization
+        
         int n = nums.size();
         int prev = nums[0];
         int prev2= 0;
         
-        for(int i = 0 ; i < n; i++){
-            int pick = nums[i] ;
-            if(i > 1) pick += prev2;
+        for(int i = 1 ; i < n; i++){
+            int pick = nums[i] + prev2;
+            // if(i > 1) pick += prev2;
             int notPick = prev;
             
             int curr = max(pick , notPick);
