@@ -14,8 +14,8 @@ public:
         
         
         
-        if(n-2 >=0) fs = ans(n -2, nums, dp) + nums[n];
-        if(n -3 >= 0) ss = ans(n -3, nums, dp) + nums[n];
+         fs = ans(n -2, nums, dp) + nums[n];
+         ss = ans(n -3, nums, dp) + nums[n];
         
         return dp[n] = max(fs , ss);
     }
