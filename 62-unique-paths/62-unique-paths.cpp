@@ -42,33 +42,51 @@ public:
 
 // Tabulation
     
-int uniquePaths(int m, int n) {
+// int uniquePaths(int m, int n) {
        
-        vector<vector<int>> dp(m , vector<int> (n , 0));
-        for(int i = 0 ;i < m  ; i++){
-            for(int j = 0 ; j < n ; j++){
-                if(i == 0 && j == 0) dp[i][j] = 1;
+//         vector<vector<int>> dp(m , vector<int> (n , 0));
+//         for(int i = 0 ;i < m  ; i++){
+//             for(int j = 0 ; j < n ; j++){
+//                 if(i == 0 && j == 0) dp[i][j] = 1;
+//                 else{
+//                     int up = 0, right = 0 ;
+//                     if(i > 0)
+//                          up = dp[i-1][j];
+//                     if(j > 0)
+//                          right = dp[i][j-1];
+                    
+//                     dp[i][j] = up + right;
+//                 }
+//             }
+//         }
+    
+//     return dp[m-1][n-1];
+//    }
+    
+
+// Space Optimization
+    
+    int uniquePaths(int m, int n) {
+       vector<int> prev(n , 0);
+        for(int i = 0 ; i < m ;i++){
+            vector<int> temp(n , 0);
+            for(int j = 0 ;j < n; j++){
+                if(i == 0 && j == 0) temp[j] = 1;
                 else{
                     int up = 0, right = 0 ;
                     if(i > 0)
-                         up = dp[i-1][j];
+                         up = prev[j];
                     if(j > 0)
-                         right = dp[i][j-1];
-                    
-                    dp[i][j] = up + right;
+                         right = temp[j-1];
+                    temp[j] = up + right;
                 }
             }
+            
+            prev = temp;
         }
-    
-    return dp[m-1][n-1];
-   }
-    
-    
-//     int uniquePaths(int m, int n) {
-//         // return paths(0 , 0 ,m ,n);
         
-//         // return helper(m - 1, n -1);
+        return prev[n-1];
         
         
-//     }
+    }
 };
