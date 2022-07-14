@@ -17,27 +17,35 @@ public:
         int row = grid.size();
         int col = grid[0].size();
         
-        vector<vector<int>> dp(row , vector<int>(col , -1));
+        // Memoization & tabulation dp array
+        
+        // vector<vector<int>> dp(row , vector<int>(col , -1));
+        
+        // space optimised dp array
+        vector<int> dp(col , 0);
         
         // Memoization function call
         // return helper(grid , row - 1 , col - 1 , dp);
         
         for(int i = 0 ; i < row ; i++){
+            vector<int> temp(col , 0);
             for(int  j = 0 ; j < col ; j++){
-                if(i == 0 && j == 0) dp[i][j] = grid[i][j];
+                if(i == 0 && j == 0) temp[j] = grid[i][j];
                 
                 else{
                     int up = INT_MAX;
                     int left = INT_MAX;
                     
-                    if(i > 0) up = dp[i-1][j];
-                    if(j > 0) left = dp[i][j-1];
+                    if(i > 0) up = dp[j];
+                    if(j > 0) left = temp[j-1];
                     
-                    dp[i][j] = grid[i][j] + min(up , left);
+                    temp[j] = grid[i][j] + min(up , left);
                 }
             }
+            
+            dp = temp;
         }
         
-        return dp[row - 1][col -1];
+        return dp[col -1];
     }
 };
