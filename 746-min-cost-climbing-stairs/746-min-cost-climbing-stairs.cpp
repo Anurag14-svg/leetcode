@@ -13,17 +13,20 @@ public:
         int n = cost.size();
         vector<int> dp(n , - 1);
         // return min(f(n -1 , cost , dp) , f(n -2 , cost , dp));
-        dp[0] = cost[0];
-        dp[1] = cost[1];
+        int prev1 = cost[0];
+        int prev2 = cost[1];
         
         for(int i = 2 ; i < n ; i++){
-            int first = dp[i-1] + cost[i];
-            int second = dp[i-2] + cost[i];
+            int first = prev1 + cost[i];
+            int second = prev2 + cost[i];
             
-            dp[i] = min(first , second);
+            int curr = min(first , second);
+            
+            prev1 = prev2;
+            prev2 = curr;
         }
         
-        return min(dp[n-1] , dp[n-2]);
+        return min(prev1 , prev2);
         
     }
 };
